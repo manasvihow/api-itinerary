@@ -1,0 +1,381 @@
+:root {
+    --heading-font: "Poppins";
+    --body-font: "Roboto";
+    --footer-height: 100px;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html,
+body {
+    width: 100%;
+
+}
+
+.container {
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    padding-bottom: calc(var(--footer-height) + 20px);
+}
+#notes{
+    font-size: small;
+    font-weight: 300;
+}
+#ruler{
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+
+/* Header Start */
+.welcome-banner {
+    font-family: var(--heading-font);
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.logo-container {
+    text-align: center;
+    margin-top: 40px;
+    width: 15rem;
+}
+.logo {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.banner {
+    padding: 2rem 0;
+    color: white;
+    width: 100%;
+    background: linear-gradient(to right, #4ba1eb, #936fe0);
+    text-align: center;
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.banner #greeting {
+    font-weight: 400;
+}
+.banner #title {
+    font-weight: 600;
+}
+.banner #stay {
+    font-weight: 400;
+}
+
+.icons-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+}
+.icons-row img {
+    color: white;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+/* Header End */
+
+
+
+
+/* Trip Overview, Visa Details Start */
+.overview {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border-radius: 2rem;
+    border: 1px solid #936fe0;
+    font-family: var(--body-font);
+}
+.overview-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+    justify-content: center;
+}
+.overview-item #title {
+    font-weight: 600;
+}
+/* Trip Overview, Visa Details End */
+
+/* Activities Section Start */
+.activities {
+    width: 100%;
+    margin-top: 2rem;
+    font-family: var(--body-font);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+.activities .day-container{
+    width: 100%;
+    height: 15rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 0.25px solid #777777;
+}
+
+.day-container .sidebar{
+    height: 100%;
+    background-color: #321e5d;
+    padding: 1.25rem;
+    border-radius: 5rem;
+    writing-mode: sideways-lr;
+    color: #f9eeff;
+    text-align: center;
+}
+.day-container .sidebar h3{
+    font-weight: 500;
+}
+.day-container .photo-container{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+.photo-container .photo{
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+}
+.photo-container h4{
+    font-weight: 500;
+}
+.day-container .activities-container{
+    padding: 2rem;
+    height: 100%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1rem;
+}
+.activities-container .category{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 3rem;
+}
+.activities-container .category .category-title{
+    width: 15rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 5rem;
+}
+.content p{
+    font-size: medium;
+    font-weight: 500;
+}
+.activities-container .category .circle{
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background-color: white;
+    border: 3px solid #321e5d;
+}
+.activities ul li{
+    font-size: medium;
+    font-weight: 400;
+}
+/* Activities Section End */
+
+
+
+/* Flight Summary, Payment Plan Start */
+.mark-items-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    width: 100%;
+}
+.mark-item {
+    width: 100%;
+    position: relative; 
+    display: flex;
+    align-items: stretch; 
+    min-height: 60px; 
+}
+
+.mark-title {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 30%;
+    
+    --arrow-width: 30px;
+    clip-path: polygon(
+        0% 0%, 
+        calc(100% - var(--arrow-width)) 0%, 
+        100% 50%, 
+        calc(100% - var(--arrow-width)) 100%, 
+        0% 100%
+    );
+
+    border-radius: 40px 0 0 40px; 
+    background-color: #f9eeff;
+    color: black;
+
+    display: flex;
+    align-items: center;
+    padding-left: 2rem;
+    border: 1px solid #936fe0;
+}
+
+.mark-details {
+    margin-left: 30px; 
+    width: 100%;
+    border: 1px solid #936fe0;
+    border-radius: 40px 0 0 40px; 
+    background-color: white; 
+    padding: 1rem;
+    padding-left: 30rem;
+}
+
+/* Flight Summary, Payment Plan End */
+
+
+
+/* Hotel Bookings, Inclusion, Scope of Service, Important Notes, Activity Table, Installments Start */
+.summary {
+    width: 100%;
+    margin-top: 2rem;
+    font-family: var(--body-font);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1.5rem;
+}
+.summary h1{
+    font-weight: 600;
+}
+.summary table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0.5rem 0; 
+}
+
+.summary table thead th {
+    padding: 1rem;
+    text-align: center;
+    border-radius: 5rem 5rem 0 0;
+    font-weight: 500;
+    background-color: #321e5d;
+    color: white;
+}
+
+.summary table tbody td {
+    padding: 1.5rem;
+    text-align: center;
+    font-weight: 400;
+    background-color: #f9eeff;
+    color: black;
+}
+
+.summary table tbody tr:first-child td {
+    background-color: white;
+    color: white;
+    padding: 2px;
+}
+.summary table tbody tr:last-child td {
+    border-radius: 0 0 3rem 3rem;
+}
+
+
+/* Hotel Bookings, Inclusion, Scope of Service, Important Notes, Activity Table, Installments End */
+
+/* Footer Start */
+footer {
+    height: var(--footer-height);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0 1rem; 
+    
+    background-color: white;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.footer-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--body-font);
+}
+
+.footer-item .title {
+    font-weight: bold;
+    font-size: 10px;
+    margin: 0;
+}
+
+.footer-logo-container {
+    width: 8rem;
+}
+
+.footer-logo-container .logo {
+    width: 100%;
+    height: auto;
+}
+/* Footer End */
+
+@page {
+    size: A4;
+    margin: 11mm 17mm 17mm 17mm;
+  }
+  
+  @media print {
+    footer {
+      position: fixed;
+      bottom: 0;
+    }
+  
+    .summary, .overview, .activities-container, .mark-items-container p {
+      page-break-inside: avoid;
+    }
+  
+    html, body {
+      width: 210mm;
+      height: 297mm;
+    }
+  }
+
+  

@@ -1,0 +1,78 @@
+{
+    "traveller": {
+      "name": "Rahul",
+      "number_of_travellers": 2
+    },
+    "trip": {
+      "departure_from": "Delhi (DEL)",
+      "departure_date": "2025-08-14",
+      "destination": "Dubai, UAE",
+      "arrival_date": "2025-08-15",
+      "return_date": "2025-08-19"
+    },
+    "flights": [
+      {
+        "from": "Delhi (DEL)",
+        "to": "Dubai (DXB)",
+        "airline": "Emirates",
+        "departure": "2025-08-14T22:30",
+        "arrival": "2025-08-15T01:30",
+        "price": 23000
+      },
+      {
+        "from": "Dubai (DXB)",
+        "to": "Delhi (DEL)",
+        "airline": "Air India",
+        "departure": "2025-08-19T18:00",
+        "arrival": "2025-08-19T22:00",
+        "price": 20000
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Atlantis The Palm",
+        "check_in": "2025-08-15",
+        "check_out": "2025-08-17",
+        "price_per_night": 15000
+      },
+      {
+        "name": "Burj Al Arab",
+        "check_in": "2025-08-17",
+        "check_out": "2025-08-19",
+        "price_per_night": 30000
+      }
+    ],
+    "activities": [
+        {
+            "date": "2025-08-15",
+            "time": "10:00",
+            "title": "Eiffel Tower Visit",
+            "description": "Guided tour of the iconic Eiffel Tower."
+        },
+        {
+            "date": "2025-08-16",
+            "time": "20:00",
+            "title": "Seine River Cruise",
+            "description": "Dinner cruise along the Seine."
+        },
+        {
+            "date": "2025-08-15",
+            "time": "14:30",
+            "title": "Louvre Museum",
+            "description": "Explore masterpieces including the Mona Lisa."
+        },
+        {
+            "date": "2025-08-16",
+            "time": "11:00",
+            "title": "Montmartre Walking Tour",
+            "description": "Discover the artistic heart of Paris."
+        }
+    ],
+    "number_of_installments": 3,
+    "visa": {
+        "type": "Tourist",
+        "validity": "30 Days",
+        "processing_date": "2025-02-14"
+    }
+  }
+  

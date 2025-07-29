@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Itinerary</title>
+  
+  <style>
+    {{ .CSS }}
+  </style>
+
+</head>
+<body>
+
+    <div class="container">
+
+
+        <!-- Header -->
+        <header class="welcome-banner">
+            <div class="logo-container">
+                <img
+                    src="{{ .LogoDataURI }}"
+                    alt="vigovia logo"
+                    class="logo"
+                />
+            </div>
+
+            <div class="banner">
+                <h1 id="greeting">Hi, {{ .Traveller.Name }}</h1>
+                <h1 id="title">{{ .Trip.Destination }} Itinerary</h1>
+                <h2 id="stay">{{ tripDuration .Trip.DepartureDate .Trip.ReturnDate }}</h2>
+                <div class="icons-row">
+                    <img
+                        width="24"
+                        height="24"
+                        src="https://img.icons8.com/material-rounded/24/ffffff/airport.png"
+                        alt="airport"
+                    />
+                    <img
+                        width="24"
+                        height="24"
+                        src="https://img.icons8.com/glyph-neue/64/ffffff/building.png"
+                        alt="building"
+                    />
+                    <img
+                        width="24"
+                        height="24"
+                        src="https://img.icons8.com/external-tanah-basah-glyph-tanah-basah/48/ffffff/external-heart-beat-healthcare-tanah-basah-glyph-tanah-basah.png"
+                        alt="heart-beat"
+                    />
+                    <img
+                        width="24"
+                        height="24"
+                        src="https://img.icons8.com/material-rounded/24/ffffff/car.png"
+                        alt="car"
+                    />
+                    <img
+                        width="24"
+                        height="24"
+                        src="https://img.icons8.com/ios-filled/50/ffffff/checked-identification-documents--v2.png"
+                        alt="id-documents"
+                    />
+                </div>
+            </div>
+        </header>
+
+
+        <!-- Trip Overview -->
+        <div class="overview">
+            <div class="overview-item">
+                <p id="title">Departure From</p>
+                <p id="content">{{ .Trip.DepartureFrom }}</p>
+            </div>
+            <div class="overview-item">
+                <p id="title">Departure Date</p>
+                <p id="content">{{ .Trip.DepartureDate | formatDate }}</p>
+            </div>
+            <div class="overview-item">
+                <p id="title">Destination</p>
+                <p id="content">{{ .Trip.Destination }}</p>
+            </div>
+            <div class="overview-item">
+                <p id="title">Arrival Date</p>
+                <p id="content">{{ .Trip.ArrivalDate | formatDate }}</p>
+            </div>
+            <div class="overview-item">
+                <p id="title">Return Date</p>
+                <p id="content">{{ .Trip.ReturnDate | formatDate }}</p>
+            </div>
+        </div>
+
+                 <!-- Activites Section -->
+                 
+
+                 {{if .ProcessedActivities}}
+                 <section class="activities">
+                     {{range .ProcessedActivities}}
+                     <div class="day-container">
+                 
+                         <div class="sidebar">
+                             <h3>Day {{.DayNumber}}</h3>
+                         </div>
+                 
+                         <div class="photo-container">
+                             <div class="photo" style="background-image: url('{{.ImageURL}}'); background-size: cover; background-position: center;">
+                                 </div>
+                             <h3>{{.Date}}</h3>
+                         </div>
+                 
+                         <div class="activities-container">
+                 
+                             {{if .Morning}}
+                             <div class="category">
+                                 <div class="category-title">
+                                     <div class="circle"></div>
+                                     <div class="content"><p>Morning</p></div>
+                                 </div>
+                                 <div class="morning-activities">
+                                     <ul>
+                                         {{range .Morning}}
+                                         <li>{{.Title}}. {{.Description}}</li>
+                                         {{end}}
+                                     </ul>
+                                 </div>
+                             </div>
+                             {{end}}
+                 
+                             {{if .Afternoon}}
+                             <div class="category">
+                                 <div class="category-title">
+                                     <div class="circle"></div>
+                                     <div class="content"><p>Afternoon</p></div>
+                                 </div>
+                                 <div class="afternoon-activities">
+                                     <ul>
+                                         {{range .Afternoon}}
+                                         <li>{{.Title}}. {{.Description}}</li>
+                                         {{end}}
+                                     </ul>
+                                 </div>
+                             </div>
+                             {{end}}
+                 
+                             {{if .Evening}}
+                             <div class="category">
+                                 <div class="category-title">
+                                     <div class="circle"></div>
+                                     <div class="content"><p>Evening</p></div>
+                                 </div>
+                                 <div class="evening-activities">
+                                     <ul>
+                                         {{range .Evening}}
+                                         <li>{{.Title}}. {{.Description}}</li>
+                                         {{end}}
+                                     </ul>
+                                 </div>
+                             </div>
+                             {{end}}
+                 
+                         </div>
+                     </div>
+                     {{end}}
+                     
+                 </section>
+
+                 
+                 
+                 {{end}}
+
+
+        <!-- Flight Summary -->
+        <section class="summary" id="flight-summary">
+            <h1>Flight <span style="color: #936fe0;">Summary</span></h1>
+            <div class="mark-items-container">
+                {{ range .Flights }}
+                <div class="mark-item">
+                    <div class="mark-title"><p>{{ .Departure | formatDateFlight }}</p></div>
+                    <div class="mark-details"><p>Fly {{ .Airline }} from {{ .From }} to {{ .To }}.</p></div>
+                </div>
+                {{ end }}
+            </div>
+            <p id="notes">Note: All flights include meals, seat choice (excluding XL), and 20kg/25Kg checked  baggage.</p>
+        </section>
+
+        <hr id="ruler">
+
+
+        <!-- Hotel Bookings -->
+         <section class="summary" id="hotel-summary">
+            <h1>Hotel <span style="color: #936fe0;">Bookings</span></h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>City</th>
+                        <th>Check In</th>
+                        <th>Check Out</th>
+                        <th>Nights</th>
+                        <th>Hotel Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="spacer-row"><td colspan="5"></td></tr>
+                    {{ range .Hotels }}
+                    
+                    <tr>
+                        <td>{{ .Name }}</td>
+                        <td>{{ .CheckIn | formatDate }}</td>
+                        <td>{{ .CheckOut | formatDate }}</td>
+                        <td>{{ calculateNights .CheckIn .CheckOut }}</td>
+                        <td>{{ .Name }}</td>
+                    </tr>
+                    {{ end }}
+                </tbody>
+            </table>
+
+            <div class="terms-conditions" style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 0.5rem;">
+                <p id="notes">1. All hotels are tentative and can be replaced with similar.</p>
+                <p id="notes" >2. Breakfast included for all hotel stays.</p>
+                <p id="notes">3. All Hotels will be 4* and above category</p>
+                <p id="notes">4. A maximum occupancy of 2 people/room is allowed in most hotels. </p>
+            </div>
+
+         </section>
+
+         <hr id="ruler">
+
+         <!-- Important Notes -->
+             <section class="summary" id="important-notes">
+                <h1>Important <span style="color: #936fe0;">Notes</span></h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Point</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="spacer-row"><td colspan="1"></td></tr>
+                        <tr>
+                            <td>Airlines Standard Policy</td>
+                            <td>In case of visa rejection, visa fees or any other non cancellable
+                                component cannot be reimbursed at any  cost.</td>
+                        </tr>
+                        <tr>
+                            <td>Flight/Hotel Cancellation</td>
+                            <td>In case of visa rejection, visa fees or any other non cancellable
+                                component cannot be reimbursed at any  cost.</td>
+                        </tr>
+                        <tr>
+                            <td>Trip Insurance</td>
+                            <td>In case of visa rejection, visa fees or any other non cancellable
+                                component cannot be reimbursed at any  cost.</td>
+                        </tr>
+                        <tr>
+                            <td>Hotel Check-In & Check Out</td>
+                            <td>In case of visa rejection, visa fees or any other non cancellable
+                                component cannot be reimbursed at any  cost.</td>
+                        </tr>
+                        <tr>
+                            <td>Visa Rejection</td>
+                            <td>In case of visa rejection, visa fees or any other non cancellable
+                                component cannot be reimbursed at any  cost.</td>
+                        </tr>
+                    </tbody>
+                </table>
+              </section>
+
+              <hr id="ruler">
+
+              <!-- Scope of Service -->
+             <section class="summary" id="scope-of-service">
+                <h1>Scope of <span style="color: #936fe0;">Service</span></h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="spacer-row"><td colspan="1"></td></tr>
+                        <tr>
+                            <td>Flight Tickets And Hotel Vouchers</td>
+                            <td>Delivered 3 Days Post Full Payment</td>
+                        </tr>
+                        <tr>
+                            <td>Web Check-In</td>
+                            <td>Boarding Pass Delivery Via Email/WhatsApp</td>
+                        </tr>
+                        <tr>
+                            <td>Support</td>
+                            <td>Chat Support - Response Time: 4 Hours</td>
+                        </tr>
+                        <tr>
+                            <td>Cancellation Support</td>
+                            <td>Provided</td>
+                        </tr>
+                        <tr>
+                            <td>Trip Support</td>
+                            <td>Response Time: 5 Minutes</td>
+                        </tr>
+                    </tbody>
+                </table>
+              </section>
+
+              <hr id="ruler">
+
+
+              <!-- Inclusion Summary -->
+              <section class="summary" id="inclusion-summary">
+                <h1>Inclusion <span style="color: #936fe0;">Summary</span></h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Count</th>
+                            <th>Details</th>
+                            <th>Status/Comments</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="spacer-row"><td colspan="1"></td></tr>
+                        <tr>
+                            <td>Flight</td>
+                            <td>{{len .Flights}}</td>
+                            <td>All Flights Mentioned</td>
+                            <td>Awaiting Confirmation</td>
+                        </tr>
+                        <tr>
+                            <td>Tourist Tax</td>
+                            <td>{{len .Hotels}}</td>
+                            <td>{{.HotelNameList}}</td>
+                            <td>Awaiting Confirmation</td>
+                        </tr>
+                        <tr>
+                            <td>Hotel</td>
+                            <td>{{len .Hotels}}</td>
+                            <td>Airport To Hotel - Hotel to Attractions - Day Trips If Any</td>
+                            <td>Included</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p id="notes">Transfer Policy(Refundable Upon Claim)</p>
+                <p id="noted">If any transfer is delayed beyond 15 minutes, customers may book an app-based or  radio taxi and claim a refund for that specific leg.</p>
+              </section>
+
+
+
+         <!-- Activity Table -->
+         <section class="summary" id="activity-summary">
+            <h1>Activity <span style="color: #936fe0;">Summary</span></h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>City</th>
+                        <th>Activity</th>
+                        <th>Date/Time</th>
+                        <th>Time Required</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="spacer-row"><td colspan="4"></td></tr>
+                    
+                    {{range .Activities}}
+                    <tr>
+                        <td>{{$.Trip.Destination}}</td>
+                        <td>{{.Title}}</td>
+                        <td>{{formatActivityDateTime .Date .Time}}</td>
+                        <td>2-3 Hours</td> 
+                    </tr>
+                    {{end}}
+        
+                </tbody>
+            </table>
+        </section>
+
+        <hr id="ruler">
+
+        <!-- Payment Plan -->
+        <section class="summary">
+            <h1>Payment <span style="color: #936fe0;">Plan</span></h1>
+            <div class="mark-items-container">
+                <div class="mark-item">
+                    <div class="mark-title"><p>Total Amount</p></div>
+                    <div class="mark-details"><p>₹ {{.TotalAmount | formatCurrency}}</p></div>
+                </div>
+                <div class="mark-item">
+                    <div class="mark-title"><p>TCS</p></div>
+                    <div class="mark-details"><p>Not Collected</p></div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Installment Summary -->
+        <section class="summary" id="installments-summary">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Installment</th>
+                        <th>Amount</th>
+                        <th>Due Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="spacer-row"><td colspan="3"></td></tr>
+        
+                    {{range .InstallmentPlan}}
+                    <tr>
+                        <td>{{.Label}}</td>
+                        <td>₹ {{.Amount | formatCurrency}}</td>
+                        <td>{{.DueDate}}</td>
+                    </tr>
+                    {{end}}
+        
+                </tbody>
+            </table>
+        </section>
+
+        <hr id="ruler">
+
+        <!-- Visa Details -->
+        <section class="summary" id="visa-details">
+            <h1>Visa <span style="color: #936fe0;">Details</span></h1>
+            <div class="overview" id="visa-overview">
+        
+                <div class="overview-item">
+                    <p id="title">Visa Type</p>
+                    <p id="content">{{.Visa.Type}}</p>
+                </div>
+                <div class="overview-item">
+                    <p id="title">Validity</p>
+                    <p id="content">{{.Visa.Validity}}</p>
+                </div>
+                <div class="overview-item">
+                    <p id="title">Processing Date</p>
+                    <p id="content">{{.Visa.ProcessingDate | formatDate}}</p>
+                </div>
+                
+            </div>
+        </section>
+
+        <hr id="ruler">
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-item">
+                <p class="title">Vigovia tech pvt. ltd</p>
+                <p class="title" style="font-weight: 400;">Registered Office: Hd-109 Cinnabar Hills, Links Business Park,   Karnataka, India.</p>
+            </div>
+            <div class="footer-item">
+                <p class="title">Phone: <span style="font-weight: 400;">+91-99X9999999 </span></p>
+                <p class="title">Email: <span style="font-weight: 400;">contact@vigovia.com</span></p>
+            </div>
+            <div class="footer-logo-container">
+                <img
+                src="{{.LogoDataURI}}"
+                alt="vigovia logo"
+                class="logo"
+                />
+            </div>
+        </footer>         
+
+    </div>
+      
+  
+</body>
+</html>
