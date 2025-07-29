@@ -10,7 +10,6 @@ import (
 )
 
 func GeneratePDF(dataURI string, outputPath string) error {
-	// Add allocator options for running in Docker
 	opts := append(chromedp.DefaultExecAllocatorOptions[:],
 		chromedp.Flag("headless", true),
 		chromedp.Flag("disable-gpu", true),
