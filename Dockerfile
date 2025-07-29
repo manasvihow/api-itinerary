@@ -43,5 +43,4 @@ COPY --from=builder /itinerary-api .
 EXPOSE 8080
 
 # The command to run the application
-# We add the --no-sandbox flag which is required for running Chrome as a root user in a container
 CMD ["/app/itinerary-api", "--no-sandbox"]
