@@ -10,7 +10,17 @@ import (
 )
 
 func GeneratePDF(dataURI string, outputPath string) error {
-	ctx, cancel := chromedp.NewContext(context.Background())
+	// Add allocator options for running in Docker
+	opts := append(chromedp.DefaultExecAllocatorOptions[:],
+		chromedp.Flag("headless", true),
+		chromedp.Flag("disable-gpu", true),
+		chromedp.Flag("no-sandbox", true), // This is the crucial flag
+	)
+
+	allocCtx, cancel := chromedp.NewExecAllocator(context.Background(), opts...)
+	defer cancel()
+
+	ctx, cancel := chromedp.NewContext(allocCtx)
 	defer cancel()
 
 	var buf []byte

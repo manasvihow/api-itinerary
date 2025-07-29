@@ -18,6 +18,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// GenerateItinerary godoc
+// @Summary      Generate a travel itinerary
+// @Description  Creates a travel itinerary based on the provided JSON data and returns a confirmation message with the path to the generated PDF.
+// @Accept       json
+// @Produce      json
+// @Param        itinerary  body      models.ItineraryRequest  true  "Itinerary Request"
+// @Success      200      {object}  map[string]string
+// @Failure      400      {object}  map[string]string
+// @Failure      500      {object}  map[string]string
+// @Router       /api/itinerary [post]
 func GenerateItinerary(c *gin.Context) {
 	var req models.ItineraryRequest
 	if err := c.ShouldBindJSON(&req); err != nil {

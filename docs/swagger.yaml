@@ -1,0 +1,141 @@
+basePath: /
+definitions:
+  models.Activity:
+    properties:
+      date:
+        type: string
+      description:
+        type: string
+      time:
+        type: string
+      title:
+        type: string
+    type: object
+  models.Flight:
+    properties:
+      airline:
+        type: string
+      arrival:
+        type: string
+      departure:
+        type: string
+      from:
+        type: string
+      price:
+        type: integer
+      to:
+        type: string
+    type: object
+  models.Hotel:
+    properties:
+      check_in:
+        type: string
+      check_out:
+        type: string
+      name:
+        type: string
+      price_per_night:
+        type: integer
+    type: object
+  models.ItineraryRequest:
+    properties:
+      activities:
+        items:
+          $ref: '#/definitions/models.Activity'
+        type: array
+      flights:
+        items:
+          $ref: '#/definitions/models.Flight'
+        type: array
+      hotels:
+        items:
+          $ref: '#/definitions/models.Hotel'
+        type: array
+      number_of_installments:
+        type: integer
+      traveller:
+        $ref: '#/definitions/models.Traveller'
+      trip:
+        $ref: '#/definitions/models.Trip'
+      visa:
+        $ref: '#/definitions/models.Visa'
+    type: object
+  models.Traveller:
+    properties:
+      name:
+        type: string
+      number_of_travellers:
+        type: integer
+    type: object
+  models.Trip:
+    properties:
+      arrival_date:
+        type: string
+      departure_date:
+        type: string
+      departure_from:
+        type: string
+      destination:
+        type: string
+      return_date:
+        type: string
+    type: object
+  models.Visa:
+    properties:
+      processing_date:
+        type: string
+      type:
+        type: string
+      validity:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: An API for generating travel itineraries and returning them as a PDF.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Itinerary API
+  version: "1.0"
+paths:
+  /api/itinerary:
+    post:
+      consumes:
+      - application/json
+      description: Creates a travel itinerary based on the provided JSON data and
+        returns a confirmation message with the path to the generated PDF.
+      parameters:
+      - description: Itinerary Request
+        in: body
+        name: itinerary
+        required: true
+        schema:
+          $ref: '#/definitions/models.ItineraryRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Generate a travel itinerary
+swagger: "2.0"
