@@ -8,7 +8,7 @@ import (
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 
-	_ "example/go-v1/docs" // This line is necessary for swag to find your docs!
+	_ "example/go-v1/docs" 
 )
 
 // @title           Itinerary API
@@ -26,7 +26,6 @@ import (
 // @host      localhost:8080
 // @BasePath  /
 func main() {
-	// Create the output directory if it doesn't exist
 	_ = os.Mkdir("output", 0755)
 
 	router := gin.Default()
