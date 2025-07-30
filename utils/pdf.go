@@ -13,7 +13,7 @@ func GeneratePDF(dataURI string, outputPath string) error {
 	opts := append(chromedp.DefaultExecAllocatorOptions[:],
 		chromedp.Flag("headless", true),
 		chromedp.Flag("disable-gpu", true),
-		chromedp.Flag("no-sandbox", true), // This is the crucial flag
+		chromedp.Flag("no-sandbox", true), 
 	)
 
 	allocCtx, cancel := chromedp.NewExecAllocator(context.Background(), opts...)
