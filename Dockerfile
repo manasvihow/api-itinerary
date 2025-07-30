@@ -39,8 +39,8 @@ COPY --from=builder /app/docs ./docs
 
 COPY --from=builder /itinerary-api .
 
-# Expose the port the application runs on
+
 EXPOSE 8080
 
-# The command to run the application
+
 CMD ["/app/itinerary-api", "--no-sandbox"]
